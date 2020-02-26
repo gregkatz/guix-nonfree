@@ -34,11 +34,11 @@
 (define (linux-nonfree-urls version)
   "Return a list of URLs for Linux-Nonfree VERSION."
   (list (string-append
-         "https://www.kernel.org/pub/linux/kernel/v4.x/"
-         "linux-" version ".tar.xz")))
+         "https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/snapshot/"
+         "linux-" version ".tar.gz")))
 
 (define-public linux-nonfree
-  (let* ((version "5.4.15"))
+  (let* ((version "5.6-rc3"))
     (package
       (inherit linux-libre)
       (name "linux-nonfree")
