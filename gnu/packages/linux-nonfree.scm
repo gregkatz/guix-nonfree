@@ -156,36 +156,5 @@
     (source (package-source linux-nonfree))
     (license (package-license linux-nonfree))))
 
-(define-public iwlwifi-firmware-nonfree
-  (package
-    (name "iwlwifi-firmware-nonfree")
-    (version "65b1c68c63f974d72610db38dfae49861117cae2")
-    (source (origin
-              (method git-fetch)
-              (uri (git-reference
-                    (url "git://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git")
-                    (commit version)))
-              (sha256
-               (base32
-                "1anr7fblxfcrfrrgq98kzy64yrwygc2wdgi47skdmjxhi3wbrvxz"))))
-    (build-system trivial-build-system)
-    (arguments
-     `(#:modules ((guix build utils))
-       #:builder (begin
-                   (use-modules (guix build utils))
-                   (let ((source (assoc-ref %build-inputs "source"))
-                         (fw-dir (string-append %output "/lib/firmware")))
-                     (mkdir-p fw-dir)
-                     (for-each (lambda (file)
-                                 (copy-file file
-                                            (string-append fw-dir "/"
-                                                           (basename file))))
-                               (find-files source "iwlwifi-.*\\.ucode$|LICENCE\\.iwlwifi_firmware$"))
-                     #t))))
 
-    (home-page "https://wireless.wiki.kernel.org/en/users/drivers/iwlwifi")
-    (synopsis "Non-free firmware for Intel wifi chips")
-    (description "Non-free firmware for Intel wifi chips")
-    ;; FIXME: What license?
-    (license (license:non-copyleft "http://git.kernel.org/?p=linux/kernel/git/firmware/linux-firmware.git;a=blob_plain;f=LICENCE.iwlwifi_firmware;hb=HEAD"))))
 
