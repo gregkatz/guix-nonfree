@@ -49,6 +49,10 @@
                 (sha256
                  (base32
                   "1w265k9rspg9rkmay6cy6r1rxy4javpj1f6ify4jc3zpwqmp4ymk"))))
+      (native-inputs
+       `(("kconfig" ,(local-file "wireguard.config"))
+	 ,@(alist-delete "kconfig"
+			 (package-native-inputs linux-libre))))
       (synopsis "Mainline Linux kernel, nonfree binary blobs included.")
       (description "Linux is a kernel.")
       (license license:gpl2)
