@@ -27,6 +27,7 @@
   #:use-module (guix gexp)
   #:use-module ((guix licenses) #:prefix license:)
   #:use-module (gnu packages linux)
+  #:use-module (srfi srfi-1)
   #:use-module (gnu packages tls)
   #:use-module (guix build-system trivial)
   #:use-module (guix git-download)
