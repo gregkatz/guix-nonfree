@@ -42,13 +42,15 @@
 
 (define-record-type* <wireguard-configuration> wireguard-configuration make-wireguard-configuration
   wireguard-configuration?
+  (package wireguard-configuration-package
+           (default wireguard))
   (ruleset wireguard-configuration-ruleset ; file-like object
            ))
 
 (define wireguard-shepherd-service
   (match-lambda
    (($ <wireguard-configuration> package ruleset)
-    (displaay package)
+    (display package)
     (let ((wireguard "/bin/wg-quick"))
       (shepherd-service
        (documentation "Wireguard VPN service")
@@ -66,4 +68,7 @@
    (extensions
     (list (service-extension shepherd-root-service-type
                              (compose list wireguard-shepherd-service))
-	  ))))
+	  
+	  (service-extension profile-service-type
+			     (compose list wireguard-configuration-package))))
+   ))
