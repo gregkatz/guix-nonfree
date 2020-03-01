@@ -34,7 +34,7 @@
   #:use-module (srfi srfi-9)
   #:use-module (srfi srfi-26)
   #:use-module (ice-9 match)
-  #:export (wireguard-service=type
+  #:export (wireguard-service-type
 	    wireguard-configuration
 	    wireguard-configuraation-package
 	    wireguard-configuraation-ruleset
