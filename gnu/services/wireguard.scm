@@ -14,6 +14,7 @@
   #:use-module (gnu packages admin)
   #:use-module (gnu packages base)
   #:use-module (gnu packages bash)
+  #:use-module (gnu packages vpn)
   #:use-module (gnu packages connman)
   #:use-module (gnu packages freedesktop)
   #:use-module (gnu packages linux)
