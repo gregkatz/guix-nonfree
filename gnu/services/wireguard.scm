@@ -48,6 +48,7 @@
 (define wireguard-shepherd-service
   (match-lambda
    (($ <wireguard-configuration> ruleset)
+    (package wireguard)
     (let ((wireguard "/bin/wg-quick"))
       (shepherd-service
        (documentation "Wireguard VPN service")
