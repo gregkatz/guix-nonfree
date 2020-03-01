@@ -52,7 +52,7 @@
   (match-lambda
    (($ <wireguard-configuration> package ruleset)
     (display package)
-    (let ((wireguard "/bin/wg-quick"))
+    (let ((wireguard (file-append package "/bin/wg-quick")))
       (shepherd-service
        (documentation "Wireguard VPN service")
        (provision '(wireguard))
