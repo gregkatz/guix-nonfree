@@ -34,21 +34,21 @@
   #:use-module (srfi srfi-9)
   #:use-module (srfi srfi-26)
   #:use-module (ice-9 match)
-  #:export (wireguard-service))
+  #:export (wireguard-service=type
+	    wireguard-configuration
+	    wireguard-configuraation-package
+	    wireguard-configuraation-ruleset
+	    ))
 
-(define-record-type* <wireguard-configuration>
-  wireguard-configuration
-  make-wireguard-configuration
+(define-record-type* <wireguard-configuration> wireguard-configuration make-wireguard-configuration
   wireguard-configuration?
-  (package wireguard-configuration-package
-           (default wireguard))
   (ruleset wireguard-configuration-ruleset ; file-like object
            ))
 
 (define wireguard-shepherd-service
   (match-lambda
-   (($ <wireguard-configuration> package ruleset)
-    (let ((wireguard (file-append package "/bin/wg-quick")))
+   (($ <wireguard-configuration> ruleset)
+    (let ((wireguard "/bin/wg-quick"))
       (shepherd-service
        (documentation "Wireguard VPN service")
        (provision '(wireguard))
@@ -65,6 +65,4 @@
    (extensions
     (list (service-extension shepherd-root-service-type
                              (compose list wireguard-shepherd-service))
-          (service-extension profile-service-type
-                             (compose list wireguard-configuration-package))))
-   ))
+	  ))))
